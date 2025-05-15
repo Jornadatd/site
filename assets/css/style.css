@@ -671,7 +671,7 @@ section {
 
 .portfolio-details .portfolio-info {
   padding: 30px;
-  box-shadow: 0px 0 30px rgba(5, 13, 24, 0.08);
+  box-shadow: 0px 0 30px rgba(33, 35, 39, 0.08);
   border-radius: 15px; /* Adiciona cantos arredondados ao card */
 }
 

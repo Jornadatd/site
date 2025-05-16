@@ -124,6 +124,42 @@
             font-size: 1.5em;
             margin-bottom: 0.5em;
         }
+
+        /* Estilos para blocos coloridos */
+        .article-block {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .block-primary {
+            background-color: #e8f0fe;
+            border-left: 5px solid #1a73e8;
+        }
+        .block-success {
+            background-color: #e6f4ea;
+            border-left: 5px solid #1e8e3e;
+        }
+        .block-warning {
+            background-color: #fef7e0;
+            border-left: 5px solid #f9ab00;
+        }
+        .block-danger {
+            background-color: #fce8e6;
+            border-left: 5px solid #d93025;
+        }
+        .block-info {
+            background-color: #e8f0fe;
+            border-left: 5px solid #63b3ed;
+        }
+        .block-light {
+            background-color: #f8f9fa;
+            border-left: 5px solid #dee2e6;
+        }
+        .block-dark {
+            background-color: #343a40;
+            border-left: 5px solid #212529;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -247,6 +283,8 @@
                     '|',
                     'insertImage',
                     '|',
+                    'blockStyle',
+                    '|',
                     'link', 'blockQuote'
                 ],
                 heading: {
@@ -341,6 +379,25 @@
                             label: 'Roxo claro'
                         }
                     ]
+                },
+                // Configuração para permitir divs com classes personalizadas
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: 'div',
+                            attributes: {
+                                class: true
+                            }
+                        }
+                    ]
+                },
+                // Configuração do modelo de dados
+                model: {
+                    schema: {
+                        div: {
+                            allowAttributes: ['class']
+                        }
+                    }
                 }
             })
             .then(newEditor => {
@@ -349,6 +406,51 @@
                 // Adiciona a barra de ferramentas ao container
                 document.querySelector('#toolbar-container').appendChild(editor.ui.view.toolbar.element);
                 
+                // Adiciona botões para blocos coloridos
+                const toolbar = editor.ui.view.toolbar;
+                
+                // Cria o dropdown de estilos de bloco
+                const blockStyleDropdown = document.createElement('select');
+                blockStyleDropdown.className = 'form-select form-select-sm d-inline-block';
+                blockStyleDropdown.style.width = 'auto';
+                blockStyleDropdown.style.marginRight = '10px';
+                blockStyleDropdown.innerHTML = `
+                    <option value="">Estilo do Bloco</option>
+                    <option value="block-primary">Bloco Azul</option>
+                    <option value="block-success">Bloco Verde</option>
+                    <option value="block-warning">Bloco Amarelo</option>
+                    <option value="block-danger">Bloco Vermelho</option>
+                    <option value="block-info">Bloco Info</option>
+                    <option value="block-light">Bloco Claro</option>
+                    <option value="block-dark">Bloco Escuro</option>
+                `;
+
+                // Adiciona o evento de mudança
+                blockStyleDropdown.addEventListener('change', () => {
+                    const selectedClass = blockStyleDropdown.value;
+                    if (selectedClass) {
+                        const selection = editor.model.document.selection;
+                        const range = selection.getFirstRange();
+                        
+                        if (!range.isCollapsed) {
+                            const content = editor.getData().substring(range.start.offset, range.end.offset);
+                            const wrappedContent = `<div class="article-block ${selectedClass}">${content}</div>`;
+                            editor.model.change(writer => {
+                                const viewFragment = editor.data.processor.toView(wrappedContent);
+                                const modelFragment = editor.data.toModel(viewFragment);
+                                editor.model.insertContent(modelFragment, range);
+                            });
+                        }
+                        blockStyleDropdown.value = ''; // Reset selection
+                    }
+                });
+
+                // Adiciona o dropdown à barra de ferramentas
+                const blockStyleContainer = document.createElement('div');
+                blockStyleContainer.className = 'ck ck-toolbar__item';
+                blockStyleContainer.appendChild(blockStyleDropdown);
+                toolbar.element.insertBefore(blockStyleContainer, toolbar.element.querySelector('.ck-toolbar__items').lastChild);
+
                 editor.model.document.on('change:data', () => {
                     atualizarPreview();
                 });
@@ -519,6 +621,42 @@
                             content: '';
                             display: block;
                             clear: both;
+                        }
+                        
+                        /* Estilos para blocos coloridos no preview */
+                        .article-block {
+                            padding: 20px;
+                            margin: 15px 0;
+                            border-radius: 8px;
+                        }
+                        .block-primary {
+                            background-color: #e8f0fe;
+                            border-left: 5px solid #1a73e8;
+                        }
+                        .block-success {
+                            background-color: #e6f4ea;
+                            border-left: 5px solid #1e8e3e;
+                        }
+                        .block-warning {
+                            background-color: #fef7e0;
+                            border-left: 5px solid #f9ab00;
+                        }
+                        .block-danger {
+                            background-color: #fce8e6;
+                            border-left: 5px solid #d93025;
+                        }
+                        .block-info {
+                            background-color: #e8f0fe;
+                            border-left: 5px solid #63b3ed;
+                        }
+                        .block-light {
+                            background-color: #f8f9fa;
+                            border-left: 5px solid #dee2e6;
+                        }
+                        .block-dark {
+                            background-color: #343a40;
+                            border-left: 5px solid #212529;
+                            color: white;
                         }
                     </style>
                 </head>

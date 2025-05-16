@@ -73,6 +73,64 @@
       display: block;
       clear: both;
     }
+
+    /* Estilos para a barra de compartilhamento */
+    .share-bar {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .share-bar a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .share-bar a:hover {
+      transform: scale(1.1);
+    }
+
+    .share-bar .facebook {
+      background: #3b5998;
+    }
+
+    .share-bar .twitter {
+      background: #1da1f2;
+    }
+
+    .share-bar .linkedin {
+      background: #0077b5;
+    }
+
+    .share-bar .whatsapp {
+      background: #25d366;
+    }
+
+    @media (max-width: 768px) {
+      .share-bar {
+        position: fixed;
+        bottom: 20px;
+        top: auto;
+        right: 50%;
+        transform: translateX(50%);
+        flex-direction: row;
+        z-index: 1000;
+      }
+    }
   </style>
 </head>
 
@@ -130,6 +188,13 @@
           </div>
           <div id="artigo-conteudo" class="article-content">
             <!-- O conteúdo será inserido aqui dinamicamente -->
+          </div>
+          <!-- Barra de compartilhamento -->
+          <div class="share-bar">
+            <a href="#" class="facebook" onclick="compartilharFacebook()"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="twitter" onclick="compartilharTwitter()"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="linkedin" onclick="compartilharLinkedIn()"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="whatsapp" onclick="compartilharWhatsApp()"><i class="bi bi-whatsapp"></i></a>
           </div>
           <div class="article-footer mt-5">
             <a href="index.html#artigos" class="btn btn-outline-primary">
@@ -195,6 +260,31 @@
 
     // Carregar o artigo quando a página for carregada
     window.addEventListener('load', carregarArtigo);
+
+    // Funções de compartilhamento
+    function compartilharFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      const titulo = encodeURIComponent(document.getElementById('artigo-heading').textContent);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+
+    function compartilharTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const titulo = encodeURIComponent(document.getElementById('artigo-heading').textContent);
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${titulo}`, '_blank');
+    }
+
+    function compartilharLinkedIn() {
+      const url = encodeURIComponent(window.location.href);
+      const titulo = encodeURIComponent(document.getElementById('artigo-heading').textContent);
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+
+    function compartilharWhatsApp() {
+      const url = encodeURIComponent(window.location.href);
+      const titulo = encodeURIComponent(document.getElementById('artigo-heading').textContent);
+      window.open(`https://api.whatsapp.com/send?text=${titulo}%20${url}`, '_blank');
+    }
   </script>
 </body>
 </html> 

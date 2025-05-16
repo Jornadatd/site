@@ -379,8 +379,16 @@ section {
 }
 
 .col-lg-8.content {
-  padding-left: 50px; /* Aumenta o espaçamento entre a imagem e o texto */
+  padding-left: 20px; /* Aumenta o espaçamento entre a imagem e o texto */
 }
+
+.profile-img {
+  width: 70%; /* Define um tamanho menor para a imagem */
+  max-width: 200px; /* Limita a largura máxima */
+  display: block; /* Garante que a imagem seja exibida corretamente */
+  margin: 0 auto; /* Centraliza a imagem dentro do contêiner */
+}
+
 
 /*--------------------------------------------------------------
 # Facts

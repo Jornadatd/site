@@ -50,7 +50,7 @@
 
       <div class="profile">
         <img src="assets/img/profile-img.png" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">Jornada TD</a></h1>
+        <h1 class="text-light"><a href="index.html">Fernanda de Pauli</a></h1>
         <div class="social-links mt-3 text-center">
           <a href="https://wa.me/5511953979308?text=Ol%C3%A1,%20%20peguei%20seu%20n%C3%BAmero%20atrav%C3%A9s%20do%20site%20Jornada%20TD,%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento." class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
           <a href="https://instagram.com/jornada_td?igshid=YmMyMTA2M2Y=" class="instagram"><i class="bx bxl-instagram"></i></a>
@@ -73,9 +73,9 @@
   <!-- ======= Inicio Section ======= -->
   <section id="inicio" class="d-flex flex-column justify-content-center align-items-center">
     <div class="inicio-container" data-aos="fade-in">
-      <h1>Jornada TD</h1>
+      <h1>Consultoria</h1>
       <p><!--I'm--> <span class="typed"
-          data-typed-items="Treinamento, Desenvoltimento, Capacitação, Conteúdos Digitais, E-Learning"></span></p>
+          data-typed-items="Palestras, Treinamento, Desenvolvimento, Capacitação"></span></p>
     </div>
   </section><!-- End Inicio -->
 
@@ -379,6 +379,64 @@ Conte conosco para criar e produzir materiais de comunicação que fortaleçam a
                 <h4>Telefone e Whatsapp:</h4>
                 <p>+55 (11) 95397-9308</p></a>
               </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="mailto:contato@jornadatd.com.br" method="POST" enctype="text/plain" class="php-email-form w-100">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Nome</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="email">Endereço de Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="country-code">Código do País</label>
+                  <select class="form-control" id="country-code" name="country-code" required>
+                    <option value="">Selecione</option>
+                    <option value="55">+55 Brasil</option>
+                    <option value="1">+1 EUA</option>
+                    <option value="351">+351 Portugal</option>
+                    <option value="34">+34 Espanha</option>
+                    <option value="44">+44 Reino Unido</option>
+                    <option value="33">+33 França</option>
+                    <option value="49">+49 Alemanha</option>
+                    <!-- Adicione outros países conforme necessário -->
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="phone">Telefone de Contato</label>
+                  <input type="tel" class="form-control" name="phone" id="phone" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="message">Mensagem</label>
+                <textarea class="form-control" name="message" id="message" rows="6" maxlength="350" required placeholder="Digite sua mensagem (máx. 350 caracteres)"></textarea>
+                <small id="charCount" class="form-text text-muted">0/350 caracteres</small>
+              </div>
+              <div class="text-center"><button type="submit">Enviar Mensagem</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <script>
+    // Contador de caracteres do campo mensagem
+    const message = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+    if(message && charCount) {
+      message.addEventListener('input', function() {
+        charCount.textContent = `${this.value.length}/350 caracteres`;
+      });
+    }
+    </script>
 
   </main><!-- End #main -->
 
